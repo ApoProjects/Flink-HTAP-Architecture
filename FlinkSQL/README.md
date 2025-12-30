@@ -25,6 +25,7 @@ After creating the topic and copying the Kafka connectors severed SQL tables nee
 
 ./bin/sql-client.sh gateway --endpoint http://localhost:8083
 
+```sql
 CREATE TABLE cart_events (
   userId BIGINT,
   userName STRING,
@@ -193,3 +194,4 @@ FROM (
   GROUP BY userId
 )
 WHERE is_deleted = 0;
+```
