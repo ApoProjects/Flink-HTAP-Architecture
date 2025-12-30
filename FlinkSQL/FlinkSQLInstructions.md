@@ -4,7 +4,9 @@
 
 After creating the docker containers and copying the required Kafka connectors into both the jobmanager and the taskmanager, These steps are required to run the programms.
 
-Before starting the Kafka topics need to be created manually. This is achieved easily by navigating to port 9000 (Kafdrop, Kafka UI) and creating the topics there by clicking new on the bottom left corner.
+Start the containers.
+
+The Kafka topics need to be created manually. This is achieved easily by navigating to port 9000 (Kafdrop, Kafka UI) and creating the topics there by clicking new on the bottom left corner.
 
 The required topics are :
 
@@ -196,4 +198,4 @@ FROM (
 WHERE is_deleted = 0;
 ```
 
-After inserting the above statements and assuming all containers are running and the Paths have been edited in the UserApp and Analytics App the programms can run normally.
+After inserting the above statements and assuming all containers are running and the Paths have been edited in the UserApp and Analytics App the programms can run normally. Follow the [next step](../UserApp/)
