@@ -195,3 +195,5 @@ FROM (
 )
 WHERE is_deleted = 0;
 ```
+
+After inserting the above statements and assuming all containers are running and the Paths have been edited in the UserApp and Analytics App the programms can run normally.
