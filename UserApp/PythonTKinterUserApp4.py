@@ -49,7 +49,7 @@ TOPIC_USERS = "users"  # upsert-kafka output topic from Flink
 TOPIC_USER_EVENTS = "user-events"
 
 
-# Simple product catalog (replace later if you have a product topic)
+# Simple product catalog 
 
 
 PRODUCTS = load_products(DB_PATH)
@@ -118,7 +118,7 @@ def kafka_thread():
             key_b = msg.key()
             val_b = msg.value()
 
-            # upsert-kafka keys/values are JSON; value may be None (tombstone delete)
+            # upsert-kafka keys/values are JSON; value may be None 
             try:
                 key = json.loads(key_b.decode("utf-8")) if key_b else None
             except Exception:
@@ -285,6 +285,9 @@ class App(tk.Tk):
         self.refresh_user_list()
         self.refresh_cart_view()
 
+
+#---- Methods for the functionalities ----
+
     def refresh_user_list(self):
         
         entries = [f"{uid} — {uname}" for uid, uname in sorted(user_catalog.items(), key=lambda x: x[0])]
@@ -399,7 +402,7 @@ class App(tk.Tk):
             except queue.Empty:
                 break
             if evt.get("type") in ("update", "users_update"):
-                # Only redraw if the update is for the selected user OR if it's a new user list
+                # Only redraw if the update is for the selected user or if it's a new user list
                 changed = True
 
         if changed:
@@ -416,7 +419,7 @@ class App(tk.Tk):
 
         action = "ADD" if delta > 0 else "REMOVE"
 
-        # Optional safety: don't remove below 0 (use your current cart state)
+        # Optional safety: don't remove below 0 
         cur_qty = 0
         for (u, pid), v in items.items():
             if u == uid and pid == prod["productId"]:
