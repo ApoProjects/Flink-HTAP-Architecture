@@ -15,6 +15,8 @@ Assuming the Docker containers are running and the SQL Tables have been created 
 - The csv and png files will be created in the same folder as KafkaLagPlotterV2
 - The KafkaLagAveragePlotter must be in the same directory as the files
 - The Flink UI must be opened. Within the Job, in the first task "source: cart_events", in the Metrics tab, the Metrics numRecordsOutPerSecond is selected and switched to numeric. This is the throughput metric. Adjust the Graph so the Backpressure is visible.
+- It is a reasonable idea to create directories for each rate (for example a directory KafkaLag50) and place the KafkaLagPlotterV2 and the KafkaLagAverageStdPlotter in there and move them to the next one after the 10 runs are completed.
+- The JavaLoadGenerator directory contains the files required to run it as a Maven Project including the pom.xml
 
 
 ### Execution
