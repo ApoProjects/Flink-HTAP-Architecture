@@ -28,6 +28,10 @@ After creating the topic and copying the Kafka connectors severed SQL tables nee
 ./bin/sql-client.sh gateway --endpoint http://localhost:8083
 
 ```sql
+
+SET 'execution.checkpointing.interval' = '10s';
+
+
 CREATE TABLE cart_events (
   userId BIGINT,
   userName STRING,
@@ -93,12 +97,7 @@ CREATE TABLE agg_product_sales (
 );
 
 
-INSERT INTO agg_total_cart
-SELECT
-  'all' AS metric,
-  SUM(unitPrice) AS total_price,
-  COUNT(*) AS total_items
-FROM cart_events;
+
 
 
 CREATE TABLE agg_user_items (
@@ -131,30 +130,6 @@ GROUP BY userId, productId
 HAVING SUM(delta) > 0;
 
 
-INSERT INTO agg_user_items
-SELECT * FROM user_items;
-
-
-INSERT INTO agg_user_cart
-SELECT
-  userId,
-  MAX(userName) AS userName,
-  SUM(qty) AS items,
-  SUM(subtotal) AS total_price,
-  COUNT(*) AS distinct_products
-FROM user_items
-GROUP BY userId;
-
-
-INSERT INTO agg_product_sales
-SELECT
-  productId,
-  MAX(name) AS name,
-  SUM(CASE WHEN delta > 0 THEN delta ELSE 0 END) AS sold_count,
-  SUM(CASE WHEN delta > 0 THEN delta * unitPrice ELSE 0 END) AS revenue
-FROM cart_events
-GROUP BY productId;
-
 
 CREATE TABLE user_events (
   userId BIGINT,
@@ -185,6 +160,41 @@ CREATE TABLE users (
 );
 
 
+BEGIN STATEMENT SET;
+
+INSERT INTO agg_total_cart
+SELECT
+  'all' AS metric,
+  SUM(unitPrice) AS total_price,
+  COUNT(*) AS total_items
+FROM cart_events;
+
+
+INSERT INTO agg_user_items
+SELECT * FROM user_items;
+
+
+INSERT INTO agg_user_cart
+SELECT
+  userId,
+  MAX(userName) AS userName,
+  SUM(qty) AS items,
+  SUM(subtotal) AS total_price,
+  COUNT(*) AS distinct_products
+FROM user_items
+GROUP BY userId;
+
+
+INSERT INTO agg_product_sales
+SELECT
+  productId,
+  MAX(name) AS name,
+  SUM(CASE WHEN delta > 0 THEN delta ELSE 0 END) AS sold_count,
+  SUM(CASE WHEN delta > 0 THEN delta * unitPrice ELSE 0 END) AS revenue
+FROM cart_events
+GROUP BY productId;
+
+
 INSERT INTO users
 SELECT userId, userName
 FROM (
@@ -196,6 +206,10 @@ FROM (
   GROUP BY userId
 )
 WHERE is_deleted = 0;
+
+
+END;
+
 ```
 
 After inserting the above statements and assuming all containers are running and the Paths have been edited in the UserApp and Analytics App the programms can run normally. Follow the [next step](../UserApp/UserAppInstructions.md)

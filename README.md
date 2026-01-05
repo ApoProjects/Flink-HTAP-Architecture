@@ -9,3 +9,7 @@ Clone the Repository in a local folder then follow the instructions within:
 1. [Docker](Docker/DockerInstructions.md)
 2. [FlinkSQL](FlinkSQL/FlinkSQLInstructions.md)
 3. [UserApp](UserApp/UserAppInstructions.md)
+
+
+After setting up the applications and running them, they can be tested manually or the experiments executing in the thesis can be recreated. To do that follow the instructions in:
+[Experiments](/Testing/Experiments.md)

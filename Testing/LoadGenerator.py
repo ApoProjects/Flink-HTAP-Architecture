@@ -20,9 +20,9 @@ def main():
     p.add_argument("--bootstrap", default="localhost:29092")
     p.add_argument("--topic-users", default="user-events")
     p.add_argument("--topic-cart", default="cart-events")
-    p.add_argument("--rate", type=float, default=50.0, help="events per second")
+    p.add_argument("--rate", type=float, default=500000.0, help="events per second")
     p.add_argument("--duration", type=float, default=10.0, help="seconds")
-    p.add_argument("--users", type=int, default=100, help="userId range: 1..users")
+    p.add_argument("--users", type=int, default=50, help="userId range: 1..users")
     p.add_argument("--mode", choices=["register", "delete", "cart"])   #  , required=True)
     args = p.parse_args()
 
