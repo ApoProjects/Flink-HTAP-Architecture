@@ -8,8 +8,8 @@ Assuming the Docker containers are running and the SQL Tables have been created 
 
 ### Prerequisites
 
-- Within the java LoadGenerator the rate argument (line 44) can be adjusted to the desired one. 
-- Within the KafkaLagPlotterV2 the name of the files must be changed each iteration to the corresponding number (lines 19, 20)
+- Within the java [LoadGenerator](../Testing/JavaLoadGenerator/src/main/java/org/example/LoadGen.java) the rate argument (line 44) can be adjusted to the desired one. 
+- Within the [KafkaLagPlotterV2](../Testing/Experiment1/KafkaLagPlotterV2.py) the name of the files must be changed each iteration to the corresponding number (lines 19, 20)
 - For the first run the directory must be "kafka_lag_run1" for the second "kafka_lag_run2" etc
 - The naming is important since the KafkaLagAveragePlotter is based on the naming to draw the averages and standard deviation
 - The csv and png files will be created in the same folder as KafkaLagPlotterV2
