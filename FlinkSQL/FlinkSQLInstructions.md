@@ -19,7 +19,7 @@ The required topics are :
 - agg-product-sales
 
 
-After creating the topic and copying the Kafka connectors severed SQL tables need to be created and data must be inserted into them. In the Jobmanager execution environment the following commands and SQL statements in order can be used.
+After creating the topic and copying the Kafka connectors several SQL tables need to be created and data must be inserted into them. In the Jobmanager execution environment the following commands and SQL statements in order can be used.
 
 ./bin/start-cluster.sh
 
